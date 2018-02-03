@@ -32,7 +32,7 @@
                 <label for="exampleFormControlSelect1">What is the nearest city to you?</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="location">
                     % for c in cities:
-                    <option name="location"> ${c}</option> 
+                    <option name="location"> ${c["city"]}</option> 
                     % endfor
                 </select>
             </div>
@@ -44,6 +44,9 @@
             % for e in errors:
                 <p class="text-danger">${e}</p>
             % endfor
+        % endif
+        % if created:
+            You have been subscirbed
         % endif
     </div>
 </body>

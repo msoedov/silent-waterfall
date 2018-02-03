@@ -42,14 +42,19 @@ async def test_db(test_cli):
     assert resp_json == {"pong": True}
 
 
-# async def test_fixture_test_client_post(test_cli):
-#     """
-#     POST request
-#     """
-#     resp = await test_cli.post('/test_post')
-#     assert resp.status == 200
-#     resp_json = await resp.json()
-#     assert resp_json == {"POST": True}
+async def test_main(test_cli):
+    """
+    GET request
+    """
+    resp = await test_cli.get('/')
+    assert resp.status == 200
+
+
+async def test_subscribe(test_cli):
+    resp = await test_cli.post(
+        '/subscirbe',
+        data=dict(email="elon.musk@gmail.com", location="Boston"))
+    assert resp.status == 200
 
 
 # async def test_fixture_test_client_put(test_cli):
@@ -61,7 +66,6 @@ async def test_db(test_cli):
 #     resp_json = await resp.json()
 #     assert resp_json == {"PUT": True}
 
-
 # async def test_fixture_test_client_delete(test_cli):
 #     """
 #     DELETE request
@@ -70,7 +74,6 @@ async def test_db(test_cli):
 #     assert resp.status == 200
 #     resp_json = await resp.json()
 #     assert resp_json == {"DELETE": True}
-
 
 # async def test_fixture_test_client_patch(test_cli):
 #     """
@@ -81,7 +84,6 @@ async def test_db(test_cli):
 #     resp_json = await resp.json()
 #     assert resp_json == {"PATCH": True}
 
-
 # async def test_fixture_test_client_options(test_cli):
 #     """
 #     OPTIONS request
@@ -90,7 +92,6 @@ async def test_db(test_cli):
 #     assert resp.status == 200
 #     resp_json = await resp.json()
 #     assert resp_json == {"OPTIONS": True}
-
 
 # async def test_fixture_test_client_head(test_cli):
 #     """
@@ -101,7 +102,6 @@ async def test_db(test_cli):
 #     resp_json = await resp.json()
 #     # HEAD should not have body
 #     assert resp_json is None
-
 
 # async def test_fixture_test_client_ws(test_cli):
 #     """
