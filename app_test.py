@@ -54,7 +54,7 @@ async def test_subscribe(test_cli):
     resp = await test_cli.post(
         '/subscirbe',
         data=dict(email="elon.musk@gmail.com", location="Boston"))
-    assert resp.status == 200
+    assert resp.status == 201
 
 
 # async def test_fixture_test_client_put(test_cli):

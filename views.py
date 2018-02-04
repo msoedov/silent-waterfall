@@ -17,28 +17,29 @@ def views(app: Sanic) -> Sanic:
 
     @app.route("/subscirbe", methods=['POST'])
     async def subscirbe(request):
-        schema = t.Dict(email=t.Email, location=t.String)
+        schema = t.Dict({
+            t.Key('email'): t.Email,
+            t.Key('location', to_name='city'): t.String
+        })
         errors = []
         try:
             data = schema.check(request.form)
         except t.DataError as e:
             errors.append(str(e))
+
+        data['state'] = [
+            c['state'] for c in cities if c['city'] == data['city']
+        ][0]
         try:
             await Repo.create(Subscriber, **data)
-        except peewee.OperationalError:
+        except peewee.IntegrityError:
             errors.append('Email is already used')
         return response.html(
-            tpl.render(cities=cities, errors=errorsб created=not errors),
+            tpl.render(cities=cities, errors=errors, created=not errors),
             status=201 if not errors else 200)
 
     @app.route("/v1/ping", methods=['GET'])
     async def ping(request):
-        return response.json({"pong": True})
-
-    @app.route("/v1/ping_db", methods=['GET'])
-    async def ping_db(request):
-        all_objects = await Repo.execute(Subscriber.select())
-        print(all_objects)
         return response.json({"pong": True})
 
     return app

@@ -2,7 +2,6 @@ from os.path import abspath
 from os.path import dirname
 from os.path import join
 
-
 from sanic import Sanic
 from sanic.config import LOGGING
 from sanic.exceptions import NotFound
@@ -14,6 +13,7 @@ from exception_handlers import handle_500s
 from exception_handlers import handle_timeout
 
 from views import views
+from checkr import schedule_coro
 
 
 def new_app() -> Sanic:
@@ -36,4 +36,5 @@ def main():
 
 
 if __name__ == '__main__':
+    schedule_coro()
     main()
