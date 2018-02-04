@@ -1,8 +1,8 @@
-from sanic import Sanic
-from sanic import response
-from mako.template import Template
 import peewee
 import trafaret as t
+from mako.template import Template
+from sanic import Sanic, response
+
 from storage import Repo, Subscriber
 from utils import cities
 
@@ -13,7 +13,7 @@ def views(app: Sanic) -> Sanic:
     @app.route("/", methods=['GET'])
     async def index(request):
         return response.html(
-            tpl.render(cities=cities, errors=[], created=Flase))
+            tpl.render(cities=cities, errors=[], created=False))
 
     @app.route("/subscirbe", methods=['POST'])
     async def subscirbe(request):

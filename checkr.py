@@ -1,7 +1,8 @@
-import os
-import datetime
-import aiohttp
 import asyncio
+import datetime
+import os
+
+import aiohttp
 import async_timeout
 
 from storage import Repo, Subscriber
@@ -66,6 +67,8 @@ async def send_sns_email(user: Subscriber, payload: dict):
 
 async def schedule():
     current_hour = datetime.datetime.now().hour
+    # If you end up reading this code, would you like to hear a Go dev joke?
+    # https://twitter.com/jxxf/status/959490034163269632
     run_at = 6  # 6 am
     to_wait = run_at - current_hour if current_hour < run_at else 24 - current_hour + run_at
     await asyncio.sleep(to_wait * 60 * 60)

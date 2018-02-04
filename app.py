@@ -1,19 +1,12 @@
-from os.path import abspath
-from os.path import dirname
-from os.path import join
+from os.path import abspath, dirname, join
 
 from sanic import Sanic
 from sanic.config import LOGGING
-from sanic.exceptions import NotFound
-from sanic.exceptions import RequestTimeout
-from sanic.exceptions import ServerError
+from sanic.exceptions import NotFound, RequestTimeout, ServerError
 
-from exception_handlers import handle_404s
-from exception_handlers import handle_500s
-from exception_handlers import handle_timeout
-
-from views import views
 from checkr import schedule_coro
+from exception_handlers import handle_404s, handle_500s, handle_timeout
+from views import views
 
 
 def new_app() -> Sanic:

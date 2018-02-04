@@ -1,7 +1,9 @@
-import os
 import asyncio
+import os
+
 import peewee
 import peewee_async
+
 # Nothing special, just define model and database:
 
 database = peewee_async.PostgresqlDatabase(
